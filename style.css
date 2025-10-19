@@ -1,0 +1,392 @@
+:root {
+  --bg: #f8f6ff;
+  --card: #fff;
+  --accent: #d7b4f3;
+  --button: #b88af5;
+  --text: #333;
+  --highlight: #f5e9ff;
+  --urgent: #ff6f91; /* Merah Muda untuk Urgent */
+  --finished: #5cb85c; /* Hijau untuk Selesai */
+  --overdue: #d9534f; /* Merah untuk Kelewat */
+  --header-text: #5d4a6f; /* Warna teks header yang lebih kontras */
+  --header-subtext: #7b6894;
+}
+
+body.dark {
+  --bg: #1f2230;
+  --card: #2a2d3d;
+  --accent: #9a89ff;
+  --button: #7f6aff;
+  --text: #f1f1f1;
+  --highlight: #4b416e;
+  --urgent: #ff99c8; 
+  --finished: #70e070;
+  --overdue: #ff7070;
+  --header-bg: #28325f; /* Background solid untuk header gelap */
+  --header-text: #f1f1f1;
+  --header-subtext: #d4d4d4;
+}
+
+/* === Layout umum === */
+body {
+  font-family: "Poppins", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  margin: 0;
+  transition: all 0.3s ease;
+  padding-left: 0;
+}
+
+/* Menggeser konten saat sidebar aktif (Hanya di layar besar) */
+@media (min-width: 769px) {
+    body.menu-open {
+        padding-left: 250px;
+    }
+}
+
+
+/* === Header === */
+header {
+  text-align: center;
+  /* Background default (mode terang) */
+  background: linear-gradient(180deg, #a9c8ff, #e4d9ff); 
+  padding: 20px;
+  border-radius: 0 0 20px 20px;
+  position: relative;
+  display: block; 
+  box-sizing: border-box;
+  transition: all 0.3s ease, background 0.5s ease; 
+}
+
+/* Header di mode gelap: Ini adalah perbaikan utamanya! */
+body.dark header {
+    background: var(--header-bg); /* Ganti ke warna gelap solid */
+    box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+}
+
+header h1 {
+  margin: 10px 0 5px;
+  color: var(--header-text); 
+  /* Text shadow default (mode terang) */
+  text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.7); 
+  font-size: 2em;
+  transform: none; 
+}
+
+body.dark header h1 {
+  text-shadow: none; /* Hapus text shadow di mode gelap */
+}
+
+header p {
+  margin: 0;
+  color: var(--header-subtext); 
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7);
+}
+
+body.dark header p {
+  text-shadow: none; /* Hapus text shadow di mode gelap */
+}
+
+
+/* Tombol Menu (Hamburger) */
+.menu-btn {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--header-text); 
+  font-size: 1.5em;
+  cursor: pointer;
+  z-index: 101; 
+  padding: 5px 10px;
+}
+
+/* Tombol Dark Mode */
+#darkModeToggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: var(--accent);
+  border: none;
+  color: white;
+  font-size: 1.1em;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+#darkModeToggle:hover {
+  transform: scale(1.1);
+}
+
+/* === Navigasi Sidebar === */
+nav#sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px; /* Sembunyikan di luar layar */
+  width: 250px;
+  height: 100%;
+  background: var(--highlight);
+  padding-top: 80px; /* Jarak dari header */
+  transition: left 0.3s ease;
+  z-index: 100;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+nav#sidebar.open {
+  left: 0; /* Tampilkan */
+}
+
+nav#sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav#sidebar li {
+  margin: 5px 0;
+}
+
+nav#sidebar a {
+  display: block;
+  color: var(--text);
+  text-decoration: none;
+  padding: 10px 20px;
+  margin: 0 10px;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+nav#sidebar a.active, nav#sidebar a:hover {
+  background: var(--button);
+  color: white;
+}
+nav#sidebar hr {
+  border: 0;
+  height: 1px;
+  background: var(--accent);
+  margin: 10px 20px;
+}
+
+/* Menghapus navigasi lama (nav ul) */
+nav ul:not(#sidebar ul) {
+    display: none;
+}
+
+
+/* === Konten === */
+.tab-content {
+  display: none;
+  max-width: 600px;
+  margin: 30px auto;
+  background: var(--card);
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* === Task Input === */
+.task-input {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.task-input input, .task-input button {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 0.95em;
+}
+.task-input input:not(#taskDeadline) {
+  flex-grow: 1;
+}
+
+.task-input button {
+  background: var(--button);
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+.task-input button:hover {
+  opacity: 0.9;
+}
+
+/* === Item tugas (diperbarui) === */
+.task-item {
+  background: var(--card);
+  padding: 12px 18px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+.task-item .task-info {
+    flex-grow: 1;
+}
+
+/* Status: Urgent (Mepet) */
+.task-item.urgent {
+  border-left: 5px solid var(--urgent);
+  background: linear-gradient(90deg, rgba(255, 182, 193, 0.1), var(--card) 5%);
+}
+.urgent-tag {
+  color: var(--urgent);
+  font-weight: bold;
+  font-size: 0.9em;
+  margin-left: 10px;
+}
+
+/* Status: Selesai */
+.task-item.finished {
+  border-left: 5px solid var(--finished);
+  opacity: 0.7;
+  text-decoration: line-through;
+}
+.finished-tag {
+  color: var(--finished);
+  font-weight: bold;
+  font-size: 0.9em;
+  margin-left: 10px;
+}
+
+/* Status: Kelewat */
+.task-item.overdue {
+  border-left: 5px solid var(--overdue);
+  background: linear-gradient(90deg, rgba(255, 112, 112, 0.1), var(--card) 5%);
+  opacity: 0.9;
+}
+.overdue-tag {
+  color: var(--overdue);
+  font-weight: bold;
+  font-size: 0.9em;
+  margin-left: 10px;
+}
+
+/* Checkbox dan Delete Button */
+.task-status {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.task-status input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin: 0;
+    accent-color: var(--finished); /* Warna centang */
+}
+
+
+button.delete {
+  background: #ff9bb5;
+  border: none;
+  color: white;
+  border-radius: 8px;
+  padding: 6px 10px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+/* === Focus Mode Styles === */
+.focus-controls, .focus-display, .music-sim {
+    background: var(--highlight);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+.focus-controls label {
+    font-weight: bold;
+}
+.focus-controls input {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 80px;
+    text-align: center;
+    margin-right: 10px;
+}
+#focusTimer {
+    font-size: 2em;
+    font-weight: bold;
+    color: var(--button);
+}
+
+/* === Contact Form Styles === */
+#contactForm label {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+#contactForm input, #contactForm textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+#contactForm button {
+    width: 100%;
+    padding: 12px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+/* === Footer === */
+footer {
+    text-align: center;
+    padding: 15px;
+    background: var(--highlight);
+    color: var(--text);
+    margin-top: 40px;
+    font-size: 0.85em;
+    border-radius: 20px 20px 0 0;
+}
+
+
+/* === Responsif === */
+@media (max-width: 768px) {
+  /* Di layar kecil, menu sidebar akan menutupi konten */
+  body.menu-open {
+    padding-left: 0;
+  }
+  nav#sidebar.open {
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.3);
+  }
+}
+
+@media (max-width: 600px) {
+  .task-input {
+    flex-direction: column;
+  }
+  .task-item {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+  }
+  .task-status {
+      width: 100%;
+      justify-content: space-between;
+  }
+  .task-item .task-info {
+      order: 1;
+      width: 100%;
+  }
+  .task-status {
+      order: 2;
+  }
+}

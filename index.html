@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mytasklist</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <header>
+    <button id="menuToggle" class="menu-btn">☰</button>
+    <h1>🌸 Mytasklist</h1>
+    <p>Kelola dan pantau semua tugasmu dengan gaya yang cute tapi rapi 💌</p>
+    <button id="darkModeToggle">🌙</button>
+  </header>
+
+  <nav id="sidebar">
+    <ul>
+      <li><a href="#" class="tab-link active" data-tab="home">Beranda</a></li>
+      <li><a href="#" class="tab-link" data-tab="tasks">Kelola Tugas</a></li>
+      <li><a href="#" class="tab-link" data-tab="task-log">Daftar Tugas (Log)</a></li>
+      <hr>
+      <li><a href="#" class="tab-link" data-tab="focus-mode">Mode Fokus</a></li>
+      <hr>
+      <li><a href="#" class="tab-link" data-tab="about">Tentang Kami</a></li>
+      <li><a href="#" class="tab-link" data-tab="faq">FAQ</a></li>
+      <li><a href="#" class="tab-link" data-tab="profile">Profil</a></li>
+      <li><a href="#" class="tab-link" data-tab="contact">Kontak</a></li>
+    </ul>
+  </nav>
+
+  <section id="home" class="tab-content active">
+    <div class="welcome">
+      <h2>Hai teman, ini daftar tugas kita </h2>
+      <p>Semangat yaa semuanyaa go go 💪</p>
+    </div>
+
+    <div class="deadline-section">
+      <h3>Urutan Deadline ⏰</h3>
+      <div id="deadlineList"></div>
+    </div>
+  </section>
+
+  <section id="tasks" class="tab-content">
+    <h2>📝 Tambah Tugas Baru</h2>
+    <div class="task-input">
+      <input type="text" id="taskName" placeholder="Nama tugas..." />
+      <input type="datetime-local" id="taskDeadline" />
+      <button id="addTask">Tambah</button>
+    </div>
+    
+    <h3>Semua Tugas (Edit/Hapus)</h3>
+    <div id="taskList"></div>
+  </section>
+
+  <section id="task-log" class="tab-content">
+    <h2>📋 Log Semua Tugas</h2>
+    <p>Lihat tugas yang **Mepet**, **Selesai**, atau **Kelewat**.</p>
+    <div id="allTasksLog"></div>
+  </section>
+
+  <section id="focus-mode" class="tab-content">
+    <h2>🧘 Mode Fokus</h2>
+    <div class="focus-controls">
+      <label for="focusDuration">Durasi Fokus (Menit):</label>
+      <input type="number" id="focusDuration" value="25" min="5" max="180">
+      <button id="startFocus">Mulai Fokus</button>
+    </div>
+
+    <div class="focus-display">
+      <p>Waktu Tersisa: <span id="focusTimer">--:--</span></p>
+      <p id="focusMessage"></p>
+    </div>
+
+    <hr>
+    <h3>🎧 Play Musik</h3>
+    <p>Dengarkan Musik di platform favoritmu:</p>
+    <div class="music-sim">
+      <a href="https://music.youtube.com/" target="_blank"> YTMusic</a>
+    </div>
+    <div class="music-sim">
+      <a href="https://open.spotify.com/" target="_blank"> Spotify</a>
+    </div>
+    
+  </section>
+
+  <section id="about" class="tab-content">
+    <h2>✨ Tentang Kami</h2>
+    <h3>Mytasklist</h3>
+    <p>Kami hadir untuk membantu mahasiswa mengelola deadline dengan cara yang cute, terstruktur, dan bebas stres. Aplikasi ini dibuat dengan semangat "sambil ngopi, sambil nugas santai!"</p>
+    <p>Visi kami adalah menciptakan alat manajemen waktu yang benar-benar dipakai, bukan cuma di-install.</p>
+    <h3>Info</h3>
+    <p>Teknologi yang digunakan: HTML, CSS, dan JavaScript.</p>
+  </section>
+
+  <section id="faq" class="tab-content">
+    <h2>❓ Pertanyaan Umum (FAQ)</h2>
+    
+    <h3>Cara Penggunaan Dasar</h3>
+    <div class="faq-item">
+      <h4>Bagaimana cara menambah tugas?</h4>
+      <p>Pergi ke menu "Kelola Tugas", isi "Nama tugas" dan "Deadline" (tanggal & waktu), lalu klik "Tambah".</p>
+    </div>
+    <div class="faq-item">
+      <h4>Bagaimana cara menandai tugas selesai?</h4>
+      <p>Pada halaman "Beranda" atau "Daftar Tugas (Log)", klik tombol "Selesai" atau centang "checkbox" di samping nama tugas.</p>
+    </div>
+    <div class="faq-item">
+      <h4>Apa arti tag "Mepet!"?</h4>
+      <p>Tag "⚠️ Mepet!" akan muncul otomatis jika waktu deadline tinggal kurang dari "24 jam".</p>
+    </div>
+  </section>
+
+  <section id="profile" class="tab-content">
+    <h2>👤 Profil Kami</h2>
+    <p>Ini adalah halaman profil Kelompok 6.</p>
+    <div class="profile-info">
+      <p><strong>Nama:</strong> RISQON ABDY PRATAMA</p>
+      <p><strong>NIM:</strong>  24091397115</p>
+      <p><strong>Kelas:</strong> 2024D</p>
+    </div>
+    <br>
+    <div class="profile-info">
+      <p><strong>Nama:</strong> ALIDA NAYLA FAIZAH</p>
+      <p><strong>NIM:</strong>  24091397128</p>
+      <p><strong>Kelas:</strong> 2024D</p>
+    </div>
+    <br>
+    <div class="profile-info">
+      <p><strong>Nama:</strong> SYAFIRA AULIA HIDAYAT</p>
+      <p><strong>NIM:</strong>  24091397137</p>
+      <p><strong>Kelas:</strong> 2024D</p>
+    </div>
+  </section>
+
+  <section id="contact" class="tab-content">
+    <h2>📧 Hubungi Kami</h2>
+    <p style="margin-top: 25px; text-align: left;">
+        Punya ide fitur baru yang lucu dan bermanfaat? Kami sangat menghargai feedback dan masukan untuk pengembangan aplikasi ini. Mytasklist dibuat untuk mahasiswa, jadi kami ingin memastikan aplikasi ini benar-benar membantu aktivitas belajarmu. Mari kita bangun alat ini bersama!
+    </p>
+    <form id="contactForm">
+      <label for="contactName">Nama:</label>
+      <input type="text" id="contactName" placeholder="Tuliskan nama lengkap Anda" required> 
+      
+      <label for="contactEmail">Email:</label>
+      <input type="email" id="contactEmail" placeholder="nama.anda@email.com" required> 
+      
+      <label for="contactMessage">Pesan:</label>
+      <textarea id="contactMessage" rows="5" placeholder="Tulis pesan Anda di sini..." required></textarea>
+      
+      <button type="submit">Kirim Pesan</button>
+    </form>
+    <p id="contactNotification" style="margin-top: 15px; color: var(--finished); font-weight: bold; display: none;">Pesan berhasil terkirim! Terima kasih telah menghubungi kami. ✨</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Mytasklist. Dibuat dengan 💖 untuk mahasiswa di seluruh dunia.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
